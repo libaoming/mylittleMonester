@@ -11,6 +11,9 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var monsterImg: UIImageView!
+    @IBOutlet weak var heartImg: DragImg!
+    @IBOutlet weak var foodImg: DragImg!
+    
     var imgArray = [UIImage]()
 
     override func viewDidLoad() {
@@ -25,9 +28,9 @@ class ViewController: UIViewController {
         monsterImg.animationDuration = 0.8
         monsterImg.animationRepeatCount = 0
         monsterImg.startAnimating()
-
-
-
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
     }
 }
 
