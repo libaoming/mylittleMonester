@@ -10,28 +10,54 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var monsterImg: UIImageView!
+    @IBOutlet weak var penality3Img: UIImageView!
+    @IBOutlet weak var penality2Img: UIImageView!
+    @IBOutlet weak var penality1Img: UIImageView!
+    
+    @IBOutlet weak var monsterImg: MonsterImg!
     @IBOutlet weak var heartImg: DragImg!
     @IBOutlet weak var foodImg: DragImg!
     
-    var imgArray = [UIImage]()
+    let DIM_ALPHA:CGFloat = 0.2
+    let OPAQUE: CGFloat = 1.0
+    let MAX_PENALITIES = 3
+    
+    var timer:NSTimer!
+    
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
- 
-        for x in 1...4 {
-            let img = UIImage(named: "idle\(x).png")
-            self.imgArray.append(img!)
-        }
+        heartImg.dropTarget = monsterImg
+        foodImg.dropTarget = monsterImg
         
-        monsterImg.animationImages = imgArray
-        monsterImg.animationDuration = 0.8
-        monsterImg.animationRepeatCount = 0
-        monsterImg.startAnimating()
+        penality1Img.alpha = DIM_ALPHA
+        penality3Img.alpha = DIM_ALPHA
+        penality2Img.alpha = DIM_ALPHA
+        
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "itemDropOnCharacter:", name: "onTargetDropped", object: nil)
+        
+ 
+          }
+    
+    func itemDropOnCharacter(notif: AnyObject) {
+        print(" drop on me \n")
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    func startTimer(){
+        
+        if timer != nil {
+            timer.invalidate()
+        }
+        
+        timer = NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "changeGameState", userInfo: nil, repeats: true)
+        
+        
     }
-}
+    
+  }
 
 
